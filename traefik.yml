@@ -1,0 +1,32 @@
+serversTransport:
+  rootCAs:
+    - /run/secrets/root_ca.crt
+
+entryPoints:
+  web:
+    address: ":80"
+
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: internal
+
+providers:
+  file:
+    directory: /usr/local/etc/traefik
+  docker:
+    constraints: Label(`traefik.namespace`, `$LOCALDEV_NAMESPACE`)
+    network: $LOCALDEV_NETWORK
+
+api:
+  dashboard: true
+
+certificatesResolvers:
+  internal:
+    acme:
+      email: acme@localhost
+      storage: /var/run/acme.json
+      caServer: https://localhost:14000/acme/internal/directory
+      httpChallenge:
+        entryPoint: web

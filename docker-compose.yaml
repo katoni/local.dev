@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+
+  local.dev:
+    container_name: local.dev
+    image: katoni/local.dev:latest
+    build: .
+    ports:
+      - "127.100.100.100:80:80"
+      - "127.100.100.100:443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - secrets:/run/secrets
+
+  whoami:
+    image: containous/whoami
+    expose:
+      - 80
+    labels:
+      - "local.dev.domains=whoami.local,whoami.dev,whoami.test"
+      - "domains=whoami.local"
+
+  #mysql:
+  #  image: mysql
+  #  expose:
+  #    - 3306
+  #  environment:
+  #    MYSQL_DATABASE: exampledb
+  #    MYSQL_USER: exampleuser
+  #    MYSQL_PASSWORD: examplepass
+  #    MYSQL_RANDOM_ROOT_PASSWORD: '1'
+  #  labels:
+  #    - "domains=mysql.local.dev"
+
+  #dockergen:
+  #  image: jwilder/docker-gen
+  #  command: -notify-sighup nginx -watch /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+  #  volumes:
+  #    - /var/run/docker.sock:/tmp/docker.sock:ro
+  #    - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
+
+volumes:
+  secrets:
+
+networks:
+  default:
+    name: local.dev
+    external: false

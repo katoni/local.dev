@@ -1,0 +1,5 @@
+http:
+  routers:
+    dashboard:
+      rule: Host(`{{ env "LOCLADEV_DOMAIN" | default "traefik.local.dev" }}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      service: api@internal

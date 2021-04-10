@@ -1,0 +1,40 @@
+{
+  "root": "/run/secrets/root_ca.crt",
+  "crt": "/run/secrets/intermediate_ca.crt",
+  "key": "/run/secrets/intermediate_ca.key",
+  "password": null,
+  "address": ":14000",
+  "dnsNames": [
+    "localhost"
+  ],
+  "logger": {
+    "format": "text"
+  },
+  "authority": {
+    "claims": {
+      "maxTLSCertDuration": "2160h",
+      "defaultTLSCertDuration": "720h"
+    },
+    "provisioners": [
+      {
+        "type": "ACME",
+        "name": "internal"
+      }
+    ]
+  },
+  "tls": {
+    "cipherSuites": [
+      "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+    ],
+    "minVersion": 1.2,
+    "maxVersion": 1.2,
+    "renegotiation": false
+  },
+  "db": {
+    "type": "badger",
+    "dataSource": "/run/db",
+    "valueDir": "/run/secrets/badger",
+    "badgerFileLoadingMode": "MemoryMap"
+  }
+}

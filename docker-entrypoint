@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+mkdir -p /run/secrets && cd /run/secrets
+
+if [ ! -f "./root_ca.crt" ]; then
+  /usr/local/bin/step certificate create "Fake Authority Root CA" ./root_ca.crt ./root_ca.key --profile root-ca --insecure --no-password
+fi
+
+if [ ! -f "./intermediate_ca.crt" ]; then
+  /usr/local/bin/step certificate create "Fake Authority Intermediate CA" ./intermediate_ca.crt ./intermediate_ca.key --profile intermediate-ca --ca ./root_ca.crt --ca-key ./root_ca.key --insecure --no-password
+fi
+
+cd -
+
+sed -i "s/\$LOCALDEV_NAMESPACE/${LOCALDEV_NAMESPACE:-local.dev}/g" /usr/local/etc/traefik.yml
+sed -i "s/\$LOCALDEV_NETWORK/${LOCALDEV_NETWORK:-local.dev}/g" /usr/local/etc/traefik.yml
+
+exec "$@"
