@@ -26,7 +26,7 @@ Install the Root CA into your Trusted Root Certification Authorities store.
 
 In this example we setup a whoami container using Docker Compose.
 
-```
+```yaml
 version: "3.7"
 services:
   whoami:
@@ -34,6 +34,7 @@ services:
     labels:
       - "local.dev.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`whoami.local`)"
+      - "traefik.http.middlewares.whoami.redirectscheme.scheme=https" # optional
     networks:
       - default
       - local.dev
@@ -43,6 +44,8 @@ networks:
     external:
       name: local.dev
 ```
+
+**Traefik documentation**: https://doc.traefik.io/traefik/routing/providers/docker/
 
 Add an entry to your hosts file:
 
