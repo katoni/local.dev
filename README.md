@@ -6,10 +6,16 @@ Create a named volume to persist certificates:
 $ docker volume create local.dev
 ```
 
-Start the Docker image with a custom local IP:
+Create a network to use for Traefik connections to all containers:
 
 ```
-$ docker run -p "80:80" -p "443:443" -v /var/run/docker.sock:/var/run/docker.sock -v local.dev:/run/secrets katoni/local.dev
+$ docker network create local.dev
+```
+
+Start the **local.dev** container:
+
+```
+$ docker run --name local.dev --restart unless-stopped --network local.dev -d -p "80:80" -p "443:443" -v /var/run/docker.sock:/var/run/docker.sock -v local.dev:/run/secrets katoni/local.dev
 ```
 
 **Note**: You can use a custom IP with `-p "127.100.100.100:80:80" -p "127.100.100.100:443:443"`.
