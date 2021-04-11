@@ -3,8 +3,9 @@ FROM alpine
 LABEL maintainer="martin@katoni.dk"
 
 ENV LOCALDEV_DOMAIN=local.dev
-ENV LOCALDEV_NAMESPACE=local.dev
 ENV LOCALDEV_NETWORK=local.dev
+ENV LOCALDEV_CONSTRAINTS_LABEL_KEY=local.dev.enable
+ENV LOCALDEV_CONSTRAINTS_LABEL_VALUE=true
 
 ENV LEGO_CA_CERTIFICATES=/run/secrets/root_ca.crt
 

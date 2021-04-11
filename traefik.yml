@@ -16,7 +16,7 @@ providers:
   file:
     directory: /usr/local/etc/traefik
   docker:
-    constraints: Label(`traefik.namespace`, `$LOCALDEV_NAMESPACE`)
+    constraints: Label(`$LOCALDEV_CONSTRAINTS_LABEL_KEY`, `$LOCALDEV_CONSTRAINTS_LABEL_VALUE`)
     network: $LOCALDEV_NETWORK
 
 api:

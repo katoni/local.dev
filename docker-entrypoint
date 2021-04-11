@@ -13,7 +13,8 @@ fi
 
 cd -
 
-sed -i "s/\$LOCALDEV_NAMESPACE/${LOCALDEV_NAMESPACE:-local.dev}/g" /usr/local/etc/traefik.yml
+sed -i "s/\$LOCALDEV_CONSTRAINTS_LABEL_KEY/${LOCALDEV_CONSTRAINTS_LABEL_KEY:-local.dev.enable}/g" /usr/local/etc/traefik.yml
+sed -i "s/\$LOCALDEV_CONSTRAINTS_LABEL_VALUE/${LOCALDEV_CONSTRAINTS_LABEL_VALUE:-true}/g" /usr/local/etc/traefik.yml
 sed -i "s/\$LOCALDEV_NETWORK/${LOCALDEV_NETWORK:-local.dev}/g" /usr/local/etc/traefik.yml
 
 exec "$@"
