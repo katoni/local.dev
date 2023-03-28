@@ -17,7 +17,7 @@ COPY traefik /usr/local/etc/traefik
 
 COPY docker-entrypoint /usr/local/bin/
 
-COPY --from=traefik:2.4 /usr/local/bin/traefik /usr/local/bin/
+COPY --from=traefik:2.9 /usr/local/bin/traefik /usr/local/bin/
 COPY --from=smallstep/step-ca /usr/local/bin/step-ca /usr/local/bin
 COPY --from=smallstep/step-cli /usr/local/bin/step /usr/local/bin
 

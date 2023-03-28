@@ -1,5 +1,8 @@
 http:
   routers:
     dashboard:
-      rule: Host(`{{ env "LOCLADEV_DOMAIN" | default "traefik.local.dev" }}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      rule: Host(`{{ env "LOCALDEV_DOMAIN" | default "local.dev" }}`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
       service: api@internal
+      entryPoints:
+        - web
+        - websecure

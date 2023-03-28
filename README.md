@@ -76,9 +76,9 @@ Only Docker containers with `--label=local.dev.namespace=my-project` will be dis
 
 # Dashboard
 
-You can access the underlaying Traefik dashboard if you add `127.0.0.1 traefik.local.dev` to your hosts file.
+You can access the underlaying Traefik dashboard if you add `127.0.0.1 local.dev` to your hosts file.
 
-Default dashboard URL: https://traefik.local.dev/dashboard/.
+Default dashboard URL: https://local.dev/dashboard/.
 
 # Reference
 
